@@ -1,4 +1,4 @@
-function isPrime(num) {
+function isPrime(num: number): boolean {
     if (num <= 1) return false;
     if (num <= 3) return true;
     if (num % 2 === 0 || num % 3 === 0) return false;
@@ -8,8 +8,8 @@ function isPrime(num) {
     return true;
 }
 
-function fibonacci(n) {
-    let a = 0, b = 1, temp;
+function fibonacci(n: number): number {
+    let a = 0, b = 1, temp: number;
     while (n >= 0) {
         temp = a;
         a = a + b;
@@ -19,7 +19,7 @@ function fibonacci(n) {
     return b;
 }
 
-function gcd(a, b) {
+function gcd(a: number, b: number): number {
     while (b !== 0) {
         let t = b;
         b = a % b;
@@ -28,7 +28,7 @@ function gcd(a, b) {
     return a;
 }
 
-function factorial(num) {
+function factorial(num: number): number {
     if (num < 0) return -1;
     if (num === 0 || num === 1) return 1;
     let result = 1;
@@ -38,118 +38,119 @@ function factorial(num) {
     return result;
 }
 
-function reverseString(str) {
+function reverseString(str: string): string {
     return str.split('').reverse().join('');
 }
 
 class Person {
+    name: string;
+    age: number;
 
-    constructor(name, age) {
+    constructor(name: string, age: number) {
         this.name = name;
         this.age = age;
     }
 
-    greet() {
+    greet(): string {
         return `Hello, my name is ${this.name}.`;
     }
 
-    haveBirthday() {
+    haveBirthday(): string {
         this.age++;
         return `Happy ${this.age}th birthday, ${this.name}!`;
     }
 }
 
 class Student extends Person {
+    studentId: string;
 
-    constructor(name, age, studentId) {
+    constructor(name: string, age: number, studentId: string) {
         super(name, age);
         this.studentId = studentId;
     }
 
-    introduce() {
+    introduce(): string {
         return `Hi, I am ${this.name}, a student with ID ${this.studentId}.`;
     }
 }
 
 class Teacher extends Person {
+    subject: string;
 
-    constructor(name, age, subject) {
+    constructor(name: string, age: number, subject: string) {
         super(name, age);
         this.subject = subject;
     }
 
-    teach() {
+    teach(): string {
         return `Teaching ${this.subject} is my passion.`;
     }
 }
 
 class Janitor extends Person {
+    cleaningDuty: string;
 
-    constructor(name, age, cleaningDuty) {
+    constructor(name: string, age: number, cleaningDuty: string) {
         super(name, age);
         this.cleaningDuty = cleaningDuty;
     }
 
-    clean() {
+    clean(): string {
         return `Curenntly I am cleaning ${this.cleaningDuty}.`;
     }
 }
 
-class Queue {
-    constructor() {
-        this.items = [];
-    }
+class Queue<T> {
+    private items: T[] = [];
 
-    enqueue(element) {
+    enqueue(element: T): void {
         this.items.push(element);
     }
 
-    dequeue() {
+    dequeue(): T | string {
         if (this.isEmpty()) return "Queue is empty";
         return this.items.shift();
     }
 
-    isEmpty() {
+    isEmpty(): boolean {
         return this.items.length === 0;
     }
 
-    peek() {
+    peek(): boolean {
         return this.isEmpty() ? "Queue is empty" : this.items[0];
     }
 
-    size() {
+    size(): number {
         return this.items.length;
     }
 }
 
-class Stack {
-    constructor() {
-        this.items = [];
-    }
+class Stack<T> {
+    private items: T[] = [];
 
-    push(element) {
+    push(element: T): void {
         this.items.push(element);
     }
 
-    pop() {
+    pop():T | string {
         if (this.isEmpty()) return "Stack is empty";
         return this.items.pop();
     }
 
-    peek()  {
+    peek():T | string {
         return this.isEmpty() ? "Stack is empty" : this.items[this.items.length - 1];
     }
 
-    isEmpty() {
+    isEmpty(): boolean {
         return this.items.length === 0;
     }
 
-    size() {
+    size(): number {
         return this.items.length;
     }
 }
 
-function quickSort(arr) {
+function quickSort<T>(arr: T[]): T[] {
     if (arr.length <= 1) return arr;
     let pivot = arr[Math.floor(arr.length / 2)];
     let left = arr.filter(x => x < pivot);
@@ -165,7 +166,7 @@ console.log('Is 29 prime?', isPrime(29));
 console.log('Factorial of 5:', factorial(5));
 console.log('Reversed string of "hello":', reverseString('hello'));
 
-let queue = new Queue();
+let queue = new Queue<number>();
 queue.enqueue(1);
 queue.enqueue(2);
 queue.enqueue(3);
@@ -174,7 +175,7 @@ console.log('Queue size:', queue.size());
 console.log('Dequeued:', queue.dequeue());
 console.log('Queue size after dequeue:', queue.size());
 
-let stack = new Stack();
+let stack = new Stack<number>();
 stack.push(10);
 stack.push(20);
 stack.push(30);
