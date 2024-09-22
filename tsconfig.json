@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "es2015", // Set target to ES2015
+        "lib": ["es2015", "dom"], // Include ES2015 and DOM libraries
+        "module": "commonjs", // Adjust as needed
+        "strict": true, // Enable strict mode
+        "esModuleInterop": true, // Allow synthetic default imports
+        "skipLibCheck": true // Skip type checking of declaration files
+    },
+    "include": [
+        "js/main.ts" // Include your main file
+    ]
+}
