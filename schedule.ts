@@ -1,28 +1,28 @@
 // base types
-type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
-type TimeSlot = "8:30-10:00" | "10:15-11:45" | "12:15-13:45" | "14:00-15:30" | "15:45-17:15";
-type CourseType = "Lecture" | "Seminar" | "Lab" | "Practice";
+export type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
+export type TimeSlot = "8:30-10:00" | "10:15-11:45" | "12:15-13:45" | "14:00-15:30" | "15:45-17:15";
+export type CourseType = "Lecture" | "Seminar" | "Lab" | "Practice";
 
 // base structures
-type Professor = {
+export type Professor = {
     id: number;
     name: string;
     department: string;
 };
 
-type Classroom = {
+export type Classroom = {
     number: string;
     capacity: number;
     hasProjector: boolean;
 };
 
-type Course = {
+export type Course = {
     id: number;
     name: string;
     type: CourseType;
 };
 
-type Lesson = {
+export type Lesson = {
     lessonId: number;
     courseId: number;
     professorId: number;
@@ -32,17 +32,17 @@ type Lesson = {
 };
 
 // arrays
-let professors: Professor[] = [];
-let classrooms: Classroom[] = [];
-let courses: Course[] = [];
-let schedule: Lesson[] = [];
+export let professors: Professor[] = [];
+export let classrooms: Classroom[] = [];
+export let courses: Course[] = [];
+export let schedule: Lesson[] = [];
 
 // functions for arrays
-function addProfessor(professor: Professor): void {
+export function addProfessor(professor: Professor): void {
     professors.push(professor);
 }
 
-function addLesson(lesson: Lesson): boolean {
+export function addLesson(lesson: Lesson): boolean {
     if (validateLesson(lesson) === null) {
         schedule.push(lesson);
         return true;
@@ -51,7 +51,7 @@ function addLesson(lesson: Lesson): boolean {
 }
 
 // search and filter functions
-function findAvailableClassrooms(timeSlot: TimeSlot, dayOfWeek: DayOfWeek): string[] {
+export function findAvailableClassrooms(timeSlot: TimeSlot, dayOfWeek: DayOfWeek): string[] {
     const occupiedClassrooms = schedule
         .filter(lesson => lesson.timeSlot === timeSlot && lesson.dayOfWeek === dayOfWeek)
         .map(lesson => lesson.classroomNumber);
@@ -61,17 +61,17 @@ function findAvailableClassrooms(timeSlot: TimeSlot, dayOfWeek: DayOfWeek): stri
         .map(classroom => classroom.number);
 }
 
-function getProfessorSchedule(professorId: number): Lesson[] {
+export function getProfessorSchedule(professorId: number): Lesson[] {
     return schedule.filter(lesson => lesson.professorId === professorId);
 }
 
 // conflict and validation
-type ScheduleConflict = {
+export type ScheduleConflict = {
     type: "ProfessorConflict" | "ClassroomConflict";
     lessonDetails: Lesson;
 };
 
-function validateLesson(lesson: Lesson): ScheduleConflict | null {
+export function validateLesson(lesson: Lesson): ScheduleConflict | null {
     for (const existingLesson of schedule) {
         if (existingLesson.dayOfWeek === lesson.dayOfWeek && existingLesson.timeSlot === lesson.timeSlot) {
             if (existingLesson.professorId === lesson.professorId) {
@@ -86,13 +86,13 @@ function validateLesson(lesson: Lesson): ScheduleConflict | null {
 }
 
 // analisys functions
-function getClassroomUtilization(classroomNumber: string): number {
+export function getClassroomUtilization(classroomNumber: string): number {
     const totalSlots = 5 * 5; // 5 days and 5 time slots
     const occupiedSlots = schedule.filter(lesson => lesson.classroomNumber === classroomNumber).length;
     return (occupiedSlots / totalSlots) * 100;
 }
 
-function getMostPopularCourseType(): CourseType {
+export function getMostPopularCourseType(): CourseType {
     const typeCount: Record<CourseType, number> = {
         Lecture: 0,
         Seminar: 0,
@@ -108,7 +108,7 @@ function getMostPopularCourseType(): CourseType {
 }
 
 // data modification
-const reassignClassroom = (lessonId: number, newClassroomNumber: string): boolean => {
+export const reassignClassroom = (lessonId: number, newClassroomNumber: string): boolean => {
     const lesson: Lesson | undefined = schedule.find((lesson: Lesson) => lesson.lessonId === lessonId);
     if (lesson && validateLesson({...lesson, professorId: -1, classroomNumber: newClassroomNumber}) === null) {
         lesson.classroomNumber = newClassroomNumber;
@@ -117,6 +117,6 @@ const reassignClassroom = (lessonId: number, newClassroomNumber: string): boolea
     return false;
 };
 
-function cancelLesson(lessonId: number): void {
+export function cancelLesson(lessonId: number): void {
     schedule = schedule.filter(lesson => lesson.courseId !== lessonId);
 }
