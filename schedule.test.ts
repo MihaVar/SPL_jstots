@@ -23,7 +23,6 @@ const course1: Course = { id: 1, name: 'Algebra', type: 'Lecture' };
 const course2: Course = { id: 2, name: 'Physics', type: 'Lab' };
 
 const lesson1: Lesson = {
-    lessonId: 1,
     courseId: 2,
     professorId: 1,
     classroomNumber: "101",
@@ -32,7 +31,6 @@ const lesson1: Lesson = {
 };
 
 const lesson2: Lesson = {
-    lessonId: 2,
     courseId: 1,
     professorId: 1,
     classroomNumber: "102",
@@ -108,7 +106,7 @@ describe('University Scheduling System Tests', () => {
 
     test("reassignClassroom should reassign classroom", () => {
         addLesson(lesson1);
-        const result = reassignClassroom(1, "102");
+        const result = reassignClassroom(2, "102");
         expect(result).toBe(true);
         expect(schedule[0].classroomNumber).toBe("102"); // The lesson is reassigned to 102 classroom
     });

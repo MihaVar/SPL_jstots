@@ -23,7 +23,6 @@ export type Course = {
 };
 
 export type Lesson = {
-    lessonId: number;
     courseId: number;
     professorId: number;
     classroomNumber: string;
@@ -109,7 +108,7 @@ export function getMostPopularCourseType(): CourseType {
 
 // data modification
 export const reassignClassroom = (lessonId: number, newClassroomNumber: string): boolean => {
-    const lesson: Lesson | undefined = schedule.find((lesson: Lesson) => lesson.lessonId === lessonId);
+    const lesson: Lesson | undefined = schedule.find((lesson: Lesson) => lesson.courseId === lessonId);
     if (lesson && validateLesson({...lesson, professorId: -1, classroomNumber: newClassroomNumber}) === null) {
         lesson.classroomNumber = newClassroomNumber;
         return true;
