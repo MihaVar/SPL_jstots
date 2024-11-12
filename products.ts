@@ -1,23 +1,23 @@
-type BaseProduct = {
+type BaseProduct = { // Продукт
     id: number;
     name: string;
     price: number;
-    description?: string;
+    description?: string; // Опис для продуктів
 };
   
-type Electronics = BaseProduct & {
+type Electronics = BaseProduct & { // Тип електроніка
     category: 'electronics';
     brand: string;
     warranty: number; // Гарантія в місяцях
 };
   
-type Clothing = BaseProduct & {
+type Clothing = BaseProduct & { // Тип одяг
     category: 'clothing';
     size: string;
     material: string;
 };
   
-type Book = BaseProduct & {
+type Book = BaseProduct & { // Тип книжка
     category: 'book';
     author: string;
     genre: string;

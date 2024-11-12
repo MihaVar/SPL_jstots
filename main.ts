@@ -1,3 +1,5 @@
+// Тестування функцій
+
 const electronics: Electronics[] = [
     {
       id: 1,
@@ -32,10 +34,10 @@ const books: Book[] = [
     }
 ];
 
-const phone = findProduct(electronics, 1);
+const phone = findProduct(electronics, 1); // Пошук продукту
 const cart: CartItem<BaseProduct>[] = [];
   
-if (phone) {
+if (phone) { // Додавання продукту
     addToCart(cart, phone, 1);
 }
   
@@ -44,7 +46,7 @@ if (tshirt) {
     addToCart(cart, tshirt, 2);
 }
   
-const total = calculateTotal(cart);
+const total = calculateTotal(cart); // Підрахунок загальної суми
   
 console.log("Кошик:", cart);
 console.log("Загальна вартість:", total);
